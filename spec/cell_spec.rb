@@ -52,4 +52,11 @@ RSpec.describe Cell do
     expect(cell.empty?).to be false
   end
 
+### Begin fire_upon method tests
+  describe 'fire_upon method' do
+    it 'something' do
+
+    end
+    
+  end
 end
