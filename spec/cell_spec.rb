@@ -4,35 +4,30 @@ require './lib/ship'
 require 'pry'
 
 RSpec.describe Cell do
-  # exists
   it 'exists' do
     cell = Cell.new("Coordinates")
 
     expect(cell).to be_a Cell
   end
 
-  # coordinate returns "A1"
   it 'returns coordinates' do
     cell = Cell.new("A1")
 
     expect(cell.coordinates).to eq "A1"
   end
 
-  # has an empty ship spot
   it 'has ship, but starts empty' do
     cell = Cell.new("A1")
 
     expect(cell.ship).to be nil
   end
 
-  # empty? returns true when no ship
   it 'makes empty? return true at start' do
     cell = Cell.new("A1")
 
     expect(cell.empty?).to be true
   end
 
-  # place_ship method adds ship to cell
   it 'can add ship with place_ship' do
     cell = Cell.new("A1")
     cruiser = Ship.new("Cruiser", 3)
@@ -42,7 +37,6 @@ RSpec.describe Cell do
     expect(cell.ship).to be cruiser
   end
 
-  # after place_ship is invoked, empty? is false
   it 'will not be empty when ship is added' do
     cell = Cell.new("A1")
     cruiser = Ship.new("Cruiser", 3)
@@ -52,4 +46,50 @@ RSpec.describe Cell do
     expect(cell.empty?).to be false
   end
 
+  describe 'fire_upon method' do
+    it 'has fired_upon? default to false' do
+      cell = Cell.new("A1")
+      cruiser = Ship.new("Cruiser", 3)
+
+      cell.place_ship(cruiser)
+
+      expect(cell.fired_upon?).to be false
+    end
+
+    it 'becomes true when fire_upon is invoked' do
+      cell = Cell.new("A1")
+      cruiser = Ship.new("Cruiser", 3)
+
+      cell.place_ship(cruiser)
+
+      expect(cell.fired_upon?).to be false
+
+      cell.fire_upon
+      expect(cell.fired_upon?).to be true
+    end
+
+    it 'removes a ship health' do
+      cell = Cell.new("A1")
+      cruiser = Ship.new("Cruiser", 3)
+
+      cell.place_ship(cruiser)
+
+      expect(cell.ship.health).to eq 3
+
+      cell.fire_upon
+      expect(cell.ship.health).to eq 2
+      expect(cell.fired_upon?).to be true
+    end  
+
+    it 'does not need a ship to be targeted' do
+      cell = Cell.new("A1")
+      
+      expect(cell.fired_upon?).to be false
+
+      cell.fire_upon
+      expect(cell.fired_upon?).to be true
+      
+      expect(cell.ship).to be nil
+    end
+  end
 end
