@@ -1,5 +1,6 @@
-require './lib/ship'
 require './lib/cell'
+require './lib/ship'
+
 require 'pry'
 
 RSpec.describe Cell do
@@ -11,28 +12,28 @@ RSpec.describe Cell do
   end
 
   # coordinate returns "A1"
-  xit 'returns coordinates' do
+  it 'returns coordinates' do
     cell = Cell.new("A1")
 
     expect(cell.coordinates).to eq "A1"
   end
 
   # has an empty ship spot
-  xit 'has ship, but starts empty' do
+  it 'has ship, but starts empty' do
     cell = Cell.new("A1")
 
     expect(cell.ship).to be nil
   end
 
   # empty? returns true when no ship
-  xit 'makes empty? return true at start' do
+  it 'makes empty? return true at start' do
     cell = Cell.new("A1")
 
     expect(cell.empty?).to be true
   end
 
   # place_ship method adds ship to cell
-  xit 'can add ship with place_ship' do
+  it 'can add ship with place_ship' do
     cell = Cell.new("A1")
     cruiser = Ship.new("Cruiser", 3)
 
@@ -42,7 +43,7 @@ RSpec.describe Cell do
   end
 
   # after place_ship is invoked, empty? is false
-  xit 'will not be empty when ship is added' do
+  it 'will not be empty when ship is added' do
     cell = Cell.new("A1")
     cruiser = Ship.new("Cruiser", 3)
 

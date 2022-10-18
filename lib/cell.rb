@@ -1,12 +1,10 @@
-require ./lib/ship.rb
-
 class Cell
 
-    attr_reader :coordinates, :empty?, :ship
+    attr_reader :coordinates, :ship
 
     def initialize(coordinates)
         @coordinates = coordinates
-        @ship = []
+        @ship = nil
         
     end
     
@@ -15,7 +13,7 @@ class Cell
     end
 
     def place_ship(ship)
-        @ship << ship
+        @ship = ship
     end
     
 end
