@@ -54,9 +54,49 @@ RSpec.describe Cell do
 
 ### Begin fire_upon method tests
   describe 'fire_upon method' do
-    it 'something' do
+    it 'has fired_upon? default to false' do
+      cell = Cell.new("A1")
+      cruiser = Ship.new("Cruiser", 3)
 
+      cell.place_ship(cruiser)
+
+      expect(cell.fired_upon?).to be false
     end
-    
+
+    it 'becomes true when fire_upon is invoked' do
+      cell = Cell.new("A1")
+      cruiser = Ship.new("Cruiser", 3)
+
+      cell.place_ship(cruiser)
+
+      expect(cell.fired_upon?).to be false
+
+      cell.fire_upon
+      expect(cell.fired_upon?).to be true
+    end
+
+    it 'removes a ship health' do
+      cell = Cell.new("A1")
+      cruiser = Ship.new("Cruiser", 3)
+
+      cell.place_ship(cruiser)
+
+      expect(cell.ship.health).to eq 3
+
+      cell.fire_upon
+      expect(cell.ship.health).to eq 2
+      expect(cell.fired_upon?).to be true
+    end  
+
+    it 'does not need a ship to be targeted' do
+      cell = Cell.new("A1")
+      
+      expect(cell.fired_upon?).to be false
+
+      cell.fire_upon
+      expect(cell.fired_upon?).to be true
+      
+      expect(cell.ship).to be nil
+    end
   end
 end
