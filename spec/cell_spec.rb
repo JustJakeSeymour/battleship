@@ -131,15 +131,17 @@ RSpec.describe Cell do
       expect(cell_1.ship.sunk?).to be true
     end
     # return "S" when the optional argument is passed
-    it 'return S if players requests to see their ships' do
+    it 'return S if player requests to see their ships' do
       cell_1 = Cell.new("B4")
       cruiser = Ship.new("Cruiser", 1)
       
       cell_1.place_ship(cruiser)
       
+      expect(cell_1.render).to eq(".")
+
       expect(cell_1.render(true)).to eq("S")
 
-      cell_1.fire_upon
+      cell_1.fire_upon 
 
       expect(cell_1.render(true)).to eq("X")
     end 
