@@ -19,5 +19,18 @@ RSpec.describe Board do
       end 
     end
   end
+  
+  it 'can return true' do
+    board = Board.new
+
+    expect(board.valid_coordinate?("A1")).to be true
+  end
+
+  it 'can return false' do
+    board = Board.new
+    
+    
+    expect(board.valid_coordinate?("X5")).to be false
+  end
 
 end
