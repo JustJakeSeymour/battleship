@@ -1,6 +1,7 @@
 require 'pry'
 require './lib/cell'
 require './lib/board'
+require './lib/ship'
 
 RSpec.describe Board do 
   describe 'Board class' do 
@@ -19,18 +20,46 @@ RSpec.describe Board do
       end 
     end
   end
-  
-  it 'can return true' do
-    board = Board.new
 
-    expect(board.valid_coordinate?("A1")).to be true
+  describe 'valid_coordinate? method' do
+    it 'can return true' do
+      board = Board.new
+
+      expect(board.valid_coordinate?("A1")).to be true
+    end
+
+    it 'can return false' do
+      board = Board.new
+      
+      
+      expect(board.valid_coordinate?("X5")).to be false
+    end
   end
 
-  it 'can return false' do
-    board = Board.new
-    
-    
-    expect(board.valid_coordinate?("X5")).to be false
-  end
+  describe 'valid_placement? method' do
+    xit 'accepts two arguments' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
 
+      expect(board.valid_placement?(cruiser, [1, 2, 3])).to be true
+    end
+    xit 'accepts a ship object & array of coordinates' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+
+      expect(board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to be true 
+    end
+    xit 'returns false if ship length != coordinates' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      
+      expect(board.valid_placement?(cruiser, ["A1", "A2"])).to be false
+    end
+    it 'confirms coordinates are consecutive' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      
+      board.valid_placement?(cruiser, ["A1","A2","A3"])
+    end
+  end
 end

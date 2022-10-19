@@ -31,6 +31,37 @@ class Board
     
   end
 
-  def valid_placement?
+  # def valid_placement?(ship, coordinates)
+  #   if ship.length == coordinates.count && valid_coordinate?(coordinates)
+  #     true
+  #   else
+  #     false
+  #   end
+  # end
+  
+  def valid_placement?(ship, coordinates)
+    split_coord = coordinates.map do |coord|
+      coord.split('') 
+    end
+    split_first = split_coord.map do |letter|
+      letter.first
+    end
+    split_last = split_coord.map do |num|
+      num.last
+    end
+
+    
+    # split_coord[0,0] >tested against> range of letters. consecutive || range of numbers. consecutive
+
+    
   end
+    
+     def range_alpha
+       "A".."D".each_cons(ship.length) do |letters|
+      array = []
+      array << letters 
+      end
+      array
+    end
+  binding.pry
 end
