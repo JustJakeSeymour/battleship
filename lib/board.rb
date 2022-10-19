@@ -1,9 +1,11 @@
 class Board
 
+  attr_reader :cells
+  
   def initialize
     @cells = {
 
-    "A1" => Cell.new(key)
+    "A1" => Cell.new("A1")
 
     }
   end
@@ -11,10 +13,11 @@ class Board
 
   def valid_coordinate?(coordinate)
 
-    board.cells.keys.include?(coordinate)
-      
-    end
+    @cells.keys.include?(coordinate)
     
+  end
+
+  def valid_placement?
   end
   
   
