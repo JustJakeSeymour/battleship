@@ -32,7 +32,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    coordinates = coordinates.map{|coordinate| coordinate.upcase}
+    coordinates = coordinates.map {|coordinate| coordinate.upcase}
     # FIRST iterate valid coordinate per coordinate instance
     are_all_coordinates_valid = coordinates.all? do |coordinate|
       valid_coordinate?(coordinate)
@@ -75,7 +75,7 @@ class Board
   
   def place(ship, coordinates)
     # upcase coordinates for safety
-    coordinates = coordinates.map{|coordinate| coordinate.upcase}
+    coordinates = coordinates.map {|coordinate| coordinate.upcase}
 
     # find that all requested coordinates are empty?
     are_all_coordinates_empty = coordinates.all? do |coordinate|
@@ -84,9 +84,21 @@ class Board
     # invoke verify_placement method on ship / coordinates
     # if passed then verify targeted cells pass empty?
     if !valid_placement?(ship, coordinates) || !are_all_coordinates_empty
-      return false
+      return "That is an invalid placement"
     end
     # if passes tests -> find cell using coordinates & place ship
-    coordinates.each{|coordinate| @cells[coordinate].place_ship(ship) }
+    coordinates.each {|coordinate| @cells[coordinate].place_ship(ship) }
+  end
+
+    # This render method is not to be confused with the render method in the Cell class 
+  def render(reveal_ship = false)
+    # This method takes an optional argument to indicate if we want to see the hidden ships
+    # Will need to iterate through the cells hash to return 4 cells per line. Iteration can happen 
+    # the concatanation OR we can do an iteration for 4 at a time and save to a variable to call in the concat
+    # May need to run in irb to actually see what the board looks like for the user
+    # Strings: #{"1 2 3 4 \n"} + #{"A row_a \n"} 
+    # Crux : how can we print a string of A1..A4 and the B1..B4 etc.
+    row_a_keys = @cells.keys.select {|key| key[0] == "A"}
+    row_a = row_a_keys.map {|key| @cells[key].render}
   end
 end

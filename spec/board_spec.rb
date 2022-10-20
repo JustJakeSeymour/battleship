@@ -121,4 +121,10 @@ RSpec.describe Board do
       expect(cell_1.ship).to eq cell_2.ship
     end
   end
+
+  describe '#render' do 
+    it 'renders a board' do 
+    end
+  end
+  
 end
