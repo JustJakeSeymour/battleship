@@ -37,19 +37,19 @@ RSpec.describe Board do
   end
 
   describe 'valid_placement? method' do
-    xit 'accepts two arguments' do
+    it 'accepts two arguments' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
 
-      expect(board.valid_placement?(cruiser, [1, 2, 3])).to be true
+      expect(board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to be true
     end
-    xit 'accepts a ship object & array of coordinates' do
+    it 'accepts a ship object & array of coordinates' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
 
       expect(board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to be true 
     end
-    xit 'returns false if ship length != coordinates' do
+    it 'returns false if ship length != coordinates' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
       
@@ -58,8 +58,19 @@ RSpec.describe Board do
     it 'confirms coordinates are consecutive' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
-      
+
       board.valid_placement?(cruiser, ["A1","A2","A3"])
     end
+    # coordinates can be lowercase
+
+    # fails if not sequential
+
+    # fails if diagonal
+
+    # fails if ALL the same coordinate
+
+    # does it pass if backwards?
+
+    # 
   end
 end

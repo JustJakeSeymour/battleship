@@ -31,31 +31,71 @@ class Board
     
   end
 
-  # def valid_placement?(ship, coordinates)
-  #   if ship.length == coordinates.count && valid_coordinate?(coordinates)
-  #     true
-  #   else
-  #     false
-  #   end
-  # end
-  
   def valid_placement?(ship, coordinates)
-    split_coord = coordinates.map do |coord|
-      coord.split('') 
+    coordinates = coordinates.map{|coordinate| coordinate.upcase}
+    # FIRST iterate valid coordinate per coordinate instance
+    are_all_coordinates_valid = coordinates.all? do |coordinate|
+      valid_coordinate?(coordinate)
     end
-    split_first = split_coord.map do |letter|
-      letter.first
+
+    # SECOND test ship size is the same as coordinate length given
+    if ship.length != coordinates.size || !are_all_coordinates_valid
+      return false
     end
-    split_last = split_coord.map do |num|
-      num.last
+
+    # NOW splitting up the coordinates to get number and letter arrays
+    split_coordinates = coordinates.map do |coordinate|
+      coordinate.split('') 
     end
+    letters = split_coordinates.map do |coordinate|
+      coordinate.first
+    end
+    numbers = split_coordinates.map do |coordinate|
+      coordinate.last.to_i
+    end
+
+    # This tests the letters are all the same, and if so the numbers are the range
+    if letters.uniq.size == 1
+      if (numbers.first..numbers.last).to_a == numbers
+        return true
+      else
+        return false
+      end
+    # This tests the numbers are all the same, and if so the letters are the range
+    elsif numbers.uniq.size == 1
+      if (letters.first..letters.last).to_a == letters
+        return true
+      else
+        return false
+      end
+    else 
+      false
+    end
+  end
+  #########################################
+  # letters OR numbers part of a range
+
+  # or letters OR numbers all the same
+
+
+  #######################################
+  # def valid_placement?(ship, coordinates)
+
 
     
     # split_coord[0,0] >tested against> range of letters. consecutive || range of numbers. consecutive
 
-    
-  end
-    
+  
+
+
+  #build a method that takes the letters and numbers of array, gives all letter & gives all numbers
+  #separate variables
+  #do this for hash.keys and do this for submitted coordinates
+  
+  # def find_all_letters
+    # all_letters = @cells.keys.map{|key| key[0][0]}
+  # end 
+
      def range_alpha
        "A".."D".each_cons(ship.length) do |letters|
       array = []
@@ -63,5 +103,5 @@ class Board
       end
       array
     end
-  binding.pry
+ 
 end
