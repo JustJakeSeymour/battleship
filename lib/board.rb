@@ -72,36 +72,4 @@ class Board
       false
     end
   end
-  #########################################
-  # letters OR numbers part of a range
-
-  # or letters OR numbers all the same
-
-
-  #######################################
-  # def valid_placement?(ship, coordinates)
-
-
-    
-    # split_coord[0,0] >tested against> range of letters. consecutive || range of numbers. consecutive
-
-  
-
-
-  #build a method that takes the letters and numbers of array, gives all letter & gives all numbers
-  #separate variables
-  #do this for hash.keys and do this for submitted coordinates
-  
-  # def find_all_letters
-    # all_letters = @cells.keys.map{|key| key[0][0]}
-  # end 
-
-     def range_alpha
-       "A".."D".each_cons(ship.length) do |letters|
-      array = []
-      array << letters 
-      end
-      array
-    end
- 
 end

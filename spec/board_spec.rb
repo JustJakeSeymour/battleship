@@ -59,18 +59,38 @@ RSpec.describe Board do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
 
-      board.valid_placement?(cruiser, ["A1","A2","A3"])
+      expect(board.valid_placement?(cruiser, ["A1","A2","A3"])).to be true
+      expect(board.valid_placement?(cruiser, ["A1","B1","C1"])).to be true
+      expect(board.valid_placement?(cruiser, ["A1","A3","A3"])).to be false
+      expect(board.valid_placement?(cruiser, ["A1","B1","A3"])).to be false
     end
     # coordinates can be lowercase
+    it 'can accept lowercase coordinates' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
 
-    # fails if not sequential
-
+      expect(board.valid_placement?(cruiser, ["c1","c2","c3"])).to be true
+    end
     # fails if diagonal
-
+    it 'cannot be diagonal' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      
+      expect(board.valid_placement?(cruiser, ["A1","B2","C3"])).to be false
+    end
     # fails if ALL the same coordinate
+    it 'cannot be all the same coordinate' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
 
+      expect(board.valid_placement?(cruiser, ["A1","A1","A1"])).to be false
+    end
     # does it pass if backwards?
+    it 'does not pass if decending order' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
 
-    # 
+      expect(board.valid_placement?(cruiser, ["C1","B1","A1"])).to be false
+    end
   end
 end
