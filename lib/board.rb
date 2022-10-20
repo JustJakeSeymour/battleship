@@ -72,4 +72,21 @@ class Board
       false
     end
   end
+  
+  def place(ship, coordinates)
+    # upcase coordinates for safety
+    coordinates = coordinates.map{|coordinate| coordinate.upcase}
+
+    # find that all requested coordinates are empty?
+    are_all_coordinates_empty = coordinates.all? do |coordinate|
+      @cells[coordinate].empty?
+    end
+    # invoke verify_placement method on ship / coordinates
+    # if passed then verify targeted cells pass empty?
+    if !valid_placement?(ship, coordinates) || !are_all_coordinates_empty
+      return false
+    end
+    # if passes tests -> find cell using coordinates & place ship
+    coordinates.each{|coordinate| @cells[coordinate].place_ship(ship) }
+  end
 end

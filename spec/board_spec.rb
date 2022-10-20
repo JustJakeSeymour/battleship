@@ -92,5 +92,33 @@ RSpec.describe Board do
 
       expect(board.valid_placement?(cruiser, ["C1","B1","A1"])).to be false
     end
+    it 'can place a ship into cells' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+     
+      board.place(cruiser, ["A1", "A2", "A3"])
+      
+      expect(board.cells["A1"].ship).to eq cruiser
+    end
+    it 'cannot place two ships into same cell' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      submarine = Ship.new("Submarine", 2)
+     
+      board.place(cruiser, ["A1", "A2", "A3"])
+      
+      expect(board.place(submarine,["A1","B1"])).to be false
+    end
+    it 'does holds the same ship object in different coordinates' do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+
+      board.place(cruiser, ["A1", "A2", "A3"])
+
+      cell_1 = board.cells["A1"]
+      cell_2 = board.cells["A2"]
+
+      expect(cell_1.ship).to eq cell_2.ship
+    end
   end
 end
