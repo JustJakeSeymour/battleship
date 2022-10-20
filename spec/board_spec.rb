@@ -37,8 +37,8 @@ RSpec.describe Board do
   end
 
   describe 'valid_placement? method' do
+    let!(:board) {Board.new} 
     it 'accepts two arguments' do
-      board = Board.new
       cruiser = Ship.new("Cruiser", 3)
 
       expect(board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to be true
@@ -92,6 +92,14 @@ RSpec.describe Board do
 
       expect(board.valid_placement?(cruiser, ["C1","B1","A1"])).to be false
     end
+    # cannot place ship in coordinates not on the board
+    it 'can not place ship in cells not included on the board' do 
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+
+      expect(board.valid_placement?(cruiser, ["C4","C5","C6"])).to be false
+    end
+
     it 'can place a ship into cells' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
@@ -124,7 +132,11 @@ RSpec.describe Board do
 
   describe '#render' do 
     it 'renders a board' do 
+      board = Board.new
+      board.render
+
+
     end
   end
-  
+
 end
