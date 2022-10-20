@@ -37,8 +37,9 @@ RSpec.describe Board do
   end
 
   describe 'valid_placement? method' do
-    let!(:board) {Board.new} 
+    # let!(:board) {Board.new} 
     it 'accepts two arguments' do
+      board = Board.new
       cruiser = Ship.new("Cruiser", 3)
 
       expect(board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to be true
@@ -131,12 +132,39 @@ RSpec.describe Board do
   end
 
   describe '#render' do 
+    let!(:board) {Board.new} 
+    let!(:cruiser) {Ship.new("Cruiser", 3)}
     it 'renders a board' do 
-      board = Board.new
-      board.render
 
-
+      expect(board.render).to eq("  1 2 3 4 \n" + "A . . . . \n" +
+                                "B . . . . \n" + "C . . . . \n" + 
+                                "D . . . .")
     end
+    # it renders the board with a ship placed and still hidden
+    it 'it renders the board with a ship placed and still hidden' do 
+      
+      expect(board.render).to eq("  1 2 3 4 \n" + "A . . . . \n" +
+                                  "B . . . . \n" + "C . . . . \n" + 
+                                  "D . . . .")
+
+      board.place(cruiser, ["A1", "A2", "A3"])
+
+      expect(board.render).to eq("  1 2 3 4 \n" + "A . . . . \n" +
+                                "B . . . . \n" + "C . . . . \n" + 
+                                "D . . . .")
+    end
+    # it renders the board with a ship placed and visible
+    it 'it renders the board with a ship placed and visible' do
+
+      board.place(cruiser, ["A1", "A2", "A3"])
+
+      expect(board.render(true)).to eq("  1 2 3 4 \n" + "A S S S . \n" +
+                                "B . . . . \n" + "C . . . . \n" + 
+                                "D . . . .")
+    end
+    # it can render when a cell is fired up and is a miss
+    # it can render when a cell is fired up and is a hit
+    # it can render when a ship is fired up and and sunk
   end
 
 end
