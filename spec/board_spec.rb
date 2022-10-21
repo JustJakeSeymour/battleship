@@ -167,9 +167,11 @@ RSpec.describe Board do
       
       board.place(cruiser, ["A1", "A2", "A3"])
       board.cells["A3"].fire_upon
-      expect(board.render(true)).to eq("  1 2 3 4 \n" + "A S S H . \n" +
-                                  "B . . . . \n" + "C . . . . \n" + 
-                                  "D . . . .")
+      expect(board.render(true)).to eq("  1 2 3 4 \n" + 
+                                       "A S S H . \n" +
+                                       "B . . . . \n" + 
+                                       "C . . . . \n" + 
+                                       "D . . . .")
     end
     
     it 'renders an X when a fire_upon hits hidden ship and sinks it' do
