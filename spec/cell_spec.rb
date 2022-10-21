@@ -1,8 +1,6 @@
 require './lib/cell'
 require './lib/ship'
 
-require 'pry'
-
 RSpec.describe Cell do
   it 'exists' do
     cell = Cell.new("Coordinates")
@@ -94,24 +92,19 @@ RSpec.describe Cell do
   end
 
   describe '#render' do 
-    # return "." if the cell has not been hit and by default
-    it 'returns a character when render is called' do 
-      cell_1 = Cell.new("B4")
+    let!(:cell_1) {Cell.new("B4")}
 
+    it 'returns a character when render is called' do 
       expect(cell_1.render).to eq(".")
     end
-    # return "M" if cell has been fired up and does NOT contain a ship 
-    # if @ship == nil
-    it 'returns M when fired upon and do not contain a ship' do 
-      cell_1 = Cell.new("B4")
 
+    it 'returns M when fired upon and do not contain a ship' do 
       cell_1.fire_upon
 
       expect(cell_1.render).to eq("M")
     end
-    # return "H" if the cell has been fired upon and DOES contan and ship 
+    
     it 'returns H when fired upon and does contain a ship' do 
-      cell_1 = Cell.new("B4")
       cruiser = Ship.new("Cruiser", 3)
 
       cell_1.place_ship(cruiser)
@@ -119,9 +112,8 @@ RSpec.describe Cell do
 
       expect(cell_1.render).to eq("H")
     end
-    # return "X" if the cell has been fired upon and its ship has sunk
+    
     it 'returns X when fired upon and ship has been sunk' do 
-      cell_1 = Cell.new("B4")
       cruiser = Ship.new("Cruiser", 1)
 
       cell_1.place_ship(cruiser)
@@ -130,9 +122,8 @@ RSpec.describe Cell do
       expect(cell_1.render).to eq("X")
       expect(cell_1.ship.sunk?).to be true
     end
-    # return "S" when the optional argument is passed
+
     it 'return S if player requests to see their ships' do
-      cell_1 = Cell.new("B4")
       cruiser = Ship.new("Cruiser", 1)
       
       cell_1.place_ship(cruiser)
