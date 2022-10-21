@@ -1,6 +1,7 @@
 require './lib/player'
 require './lib/board'
 require './lib/cell'
+require './lib/ship'
 require 'pry'
 
 RSpec.describe Player do
@@ -11,9 +12,20 @@ RSpec.describe Player do
   it 'begins with an empty board' do
     expect(player.board).to be_a Board
   end
-
-  
-  
+  it 'begins with required ships' do
+    expect(player.ships[0].name).to eq("Cruiser")
+    expect(player.ships[1].name).to eq("Submarine")
+  end
+  it 'can place required ships into board' do
+    player.choose_placement(player.ships[0], ["A1", "A2", "A3"])
+    expect(player.board.cells["A1"].ship).to eq (player.ships[0])
+    player.choose_placement(player.ships[1], ["B1", "C1"])
+    expect(player.board.cells["C1"].ship).to eq (player.ships[1])
+  end
+  it 'denies placement if given bad coordinate / ship combo' do
+    
+    
+  end
   
   
 end
