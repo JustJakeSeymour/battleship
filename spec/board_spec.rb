@@ -157,14 +157,64 @@ RSpec.describe Board do
     it 'it renders the board with a ship placed and visible' do
 
       board.place(cruiser, ["A1", "A2", "A3"])
-
+      # board.render
+# binding.pry
       expect(board.render(true)).to eq("  1 2 3 4 \n" + "A S S S . \n" +
                                 "B . . . . \n" + "C . . . . \n" + 
                                 "D . . . .")
     end
     # it can render when a cell is fired up and is a miss
+    it 'renders a M when a fired and no ship' do
+      
+      board.place(cruiser, ["A1", "A2", "A3"])
+      board.cells["B3"].fire_upon
+      expect(board.render).to eq("  1 2 3 4 \n" + "A . . . . \n" +
+                                  "B . . M . \n" + "C . . . . \n" + 
+                                  "D . . . .")
+    end
     # it can render when a cell is fired up and is a hit
+    it 'renders a H when a fire_upon hits hidden ship' do
+      
+      board.place(cruiser, ["A1", "A2", "A3"])
+      board.cells["A3"].fire_upon
+      expect(board.render).to eq("  1 2 3 4 \n" + "A . . H . \n" +
+                                  "B . . . . \n" + "C . . . . \n" + 
+                                  "D . . . .")
+    end
+    it 'renders a H when a fire_upon hits non hidden ship' do
+      
+      board.place(cruiser, ["A1", "A2", "A3"])
+      board.cells["A3"].fire_upon
+      expect(board.render(true)).to eq("  1 2 3 4 \n" + "A S S H . \n" +
+                                  "B . . . . \n" + "C . . . . \n" + 
+                                  "D . . . .")
+    end
     # it can render when a ship is fired up and and sunk
+    it 'renders an X when a fire_upon hits hidden ship and sinks it' do
+      submarine = Ship.new("Submarine", 2)
+      board.place(submarine, ["C1", "D1"])
+
+      board.place(cruiser, ["A1", "A2", "A3"])
+      board.cells["A1"].fire_upon
+      board.cells["A2"].fire_upon
+      board.cells["A3"].fire_upon
+
+      expect(board.render).to eq("  1 2 3 4 \n" + "A X X X . \n" +
+                                  "B . . . . \n" + "C . . . . \n" + 
+                                  "D . . . .")
+    end
+     it 'renders an X when a fire_upon hits hidden ship and sinks it' do
+      submarine = Ship.new("Submarine", 2)
+      board.place(cruiser, ["A1", "A2", "A3"])
+      board.place(submarine, ["C1", "D1"])
+      board.cells["A1"].fire_upon
+      board.cells["A2"].fire_upon
+      board.cells["A3"].fire_upon
+
+      expect(board.render(true)).to eq("  1 2 3 4 \n" + "A X X X . \n" +
+                                  "B . . . . \n" + "C S . . . \n" + 
+                                  "D S . . .")
+    end
   end
 
 end
