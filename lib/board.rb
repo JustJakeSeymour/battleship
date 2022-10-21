@@ -94,23 +94,27 @@ class Board
   def render(reveal_ship = false)
 
     if reveal_ship == true
-      row_a_keys = @cells.keys.select {|key| key[0] == "A"}
-      row_a = row_a_keys.map {|key| @cells[key].render(true)}
-      # Iterate over the cells hash to select all keys that start with B
-      row_b_keys = @cells.keys.select {|key| key[0] == "B"}
-      row_b = row_b_keys.map {|key| @cells[key].render(true)}
-      # Iterate over the cells hash to select all keys that start with C
-      row_c_keys = @cells.keys.select {|key| key[0] == "C"}
-      row_c = row_c_keys.map {|key| @cells[key].render(true)}
-      # Iterate over the cells hash to select all keys that start with D
-      row_d_keys = @cells.keys.select {|key| key[0] == "D"}
-      row_d = row_d_keys.map {|key| @cells[key].render(true)}
+      board_render_reveal_ships
     else reveal_ship == false
-      # This method takes an optional argument to indicate if we want to see the hidden ships
-      # Iterate over the cells hash to select all keys that start with A. Save that to a sub-array.
-      # Iterate over the new sub-array (row_a_keys). Goes into the cells hash and calls the render
-      # method on each element of the (row_a_keys) array and save that to a new sub-array (row_a)
-      # When row_a is called, we should see the a "." becasue we called the render method on it.
+      board_render_hide_ships
+    end
+
+  end
+
+  def board_render_reveal_ships
+    row_a_keys = @cells.keys.select {|key| key[0] == "A"}
+    row_a = row_a_keys.map {|key| @cells[key].render(true)}
+    row_b_keys = @cells.keys.select {|key| key[0] == "B"}
+    row_b = row_b_keys.map {|key| @cells[key].render(true)}
+    row_c_keys = @cells.keys.select {|key| key[0] == "C"}
+    row_c = row_c_keys.map {|key| @cells[key].render(true)}
+    row_d_keys = @cells.keys.select {|key| key[0] == "D"}
+    row_d = row_d_keys.map {|key| @cells[key].render(true)}
+
+    the_board = "  1 2 3 4 \n" + "A #{row_a.join(' ')} \n" + "B #{row_b.join(' ')} \n" + "C #{row_c.join(' ')} \n" + "D #{row_d.join(' ')}"
+  end
+
+  def board_render_hide_ships
       row_a_keys = @cells.keys.select {|key| key[0] == "A"}
       row_a = row_a_keys.map {|key| @cells[key].render}
       # Iterate over the cells hash to select all keys that start with B
@@ -122,7 +126,7 @@ class Board
       # Iterate over the cells hash to select all keys that start with D
       row_d_keys = @cells.keys.select {|key| key[0] == "D"}
       row_d = row_d_keys.map {|key| @cells[key].render}
+
+      the_board = "  1 2 3 4 \n" + "A #{row_a.join(' ')} \n" + "B #{row_b.join(' ')} \n" + "C #{row_c.join(' ')} \n" + "D #{row_d.join(' ')}"
     end
-    the_board = "  1 2 3 4 \n" + "A #{row_a.join(' ')} \n" + "B #{row_b.join(' ')} \n" + "C #{row_c.join(' ')} \n" + "D #{row_d.join(' ')}"
-  end
 end

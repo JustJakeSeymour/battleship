@@ -116,7 +116,7 @@ RSpec.describe Board do
      
       board.place(cruiser, ["A1", "A2", "A3"])
       
-      expect(board.place(submarine,["A1","B1"])).to be false
+      expect(board.place(submarine,["A1","B1"])).to eq ("That is an invalid placement")
     end
     it 'does holds the same ship object in different coordinates' do
       board = Board.new
