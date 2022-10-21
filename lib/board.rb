@@ -23,9 +23,7 @@ class Board
   end
   
   def valid_coordinate?(coordinate)
-
     @cells.keys.include?(coordinate)
-    
   end
 
    def valid_placement?(ship, coordinates)
@@ -74,24 +72,24 @@ class Board
 
   def place(ship, coordinates)
     coordinates = coordinates.map {|coordinate| coordinate.upcase}
-
-    are_all_coordinates_empty = coordinates.all? do |coordinate|
-      @cells[coordinate].empty?
-    end
-    if !valid_placement?(ship, coordinates) || !are_all_coordinates_empty
+    if !valid_placement?(ship, coordinates) || !are_all_coordinates_empty(coordinates)
       return "That is an invalid placement"
     end
     coordinates.each {|coordinate| @cells[coordinate].place_ship(ship) }
   end
 
-  def render(reveal_ship = false)
+  def are_all_coordinates_empty(coordinates)
+    coordinates.all? do |coordinate|
+      @cells[coordinate].empty?
+    end
+  end
 
+  def render(reveal_ship = false)
     if reveal_ship == true
       board_render_reveal_ships
     else reveal_ship == false
       board_render_hide_ships
     end
-
   end
 
   def board_render_reveal_ships
@@ -110,13 +108,10 @@ class Board
   def board_render_hide_ships
       row_a_keys = @cells.keys.select {|key| key[0] == "A"}
       row_a = row_a_keys.map {|key| @cells[key].render}
-      # Iterate over the cells hash to select all keys that start with B
       row_b_keys = @cells.keys.select {|key| key[0] == "B"}
       row_b = row_b_keys.map {|key| @cells[key].render}
-      # Iterate over the cells hash to select all keys that start with C
       row_c_keys = @cells.keys.select {|key| key[0] == "C"}
       row_c = row_c_keys.map {|key| @cells[key].render}
-      # Iterate over the cells hash to select all keys that start with D
       row_d_keys = @cells.keys.select {|key| key[0] == "D"}
       row_d = row_d_keys.map {|key| @cells[key].render}
 
