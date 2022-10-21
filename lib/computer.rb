@@ -1,3 +1,9 @@
+require 'pry'
+require './lib/cell'
+require './lib/board'
+require './lib/ship'
+require './lib/computer'
+
 # In the runner files, afte player decides to play, call Computer.new.place_ship 
 # this will create the new computer instance AND call on the place ship method all in one go
 
@@ -15,7 +21,7 @@ class Computer
     %w(D3 D4)
   ]
 
-  attr_reader :board, :ships 
+  attr_reader :board, :cruiser, :submarine, :ships 
 
   def initialize 
     @board = Board.new 
@@ -41,5 +47,5 @@ class Computer
     end
     success
   end
-  # expect(computer.place_ships).to eq(["Successfully placed cruiser", "Successfully placed submarine"])
+  
 end
