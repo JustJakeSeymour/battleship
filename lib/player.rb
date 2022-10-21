@@ -4,12 +4,14 @@ class Player
 
   def initialize
     @board = Board.new
-    @ships = [Ship.new("Cruiser", 3), Ship.new("Submarine", 2)]
+    @cruiser = Ship.new("Cruiser", 3) 
+    @submarine = Ship.new("Submarine", 2)
+    @ships = [ @cruiser, @submarine]
   end
   
   # maybe the runner will loop placement until the ship array has been successfully placed. 
   # like an each? for player.ships |ship| choose_placement(ship, GETS COORDINATES)
-  def choose_placement(ship, coordinates)
+  def place_ships(ship, coordinates)
     if @board.valid_placement?(ship, coordinates)
       @board.place(ship, coordinates)
     else
@@ -29,6 +31,5 @@ class Player
       "Please supply different coordinates."
     end
   end
-
   
 end

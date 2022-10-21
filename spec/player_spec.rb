@@ -30,13 +30,11 @@ RSpec.describe Player do
   xit 'denies placement if given bad coordinate / ship combo' do
     # binding.pry
     player.choose_placement(player.ships[0], ["A2", "A3"])
-    expect(player.board.cells["A1"].ship).to eq (player.ships[0])
-    player.choose_placement(player.ships[1], ["B1", "C1"])
-    expect(player.board.cells["C1"].ship).to eq (player.ships[1])
+    expect(player.board.valid_coordinate?).to be false
   end
   
-  it 'keeps prompting for coordinates until new value' do
-    
+  xit 'keeps prompting for coordinates until new value' do
+    # this probably makes more sense for the computer test
   end
   
   it 'can fire upon the computer board' do
@@ -47,9 +45,16 @@ RSpec.describe Player do
     
   end  
 
-  it 'keeps prompting for coordinates until new value' do
-    
+  xit 'keeps prompting for coordinates until new value' do
+    # this probably makes more sense for the computer test
   end
 
+  it 'renders player board' do
+
+  end
+
+  it 'renders player board after placement' do
+
+  end
   
 end
