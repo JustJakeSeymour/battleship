@@ -31,21 +31,8 @@ class Computer
   end
 
   def place_ships 
-    cruiser_place_ship = @board.place(@cruiser, CRUISER_VALID_PLACEMENTS.sample)
-    sub_place_ship = @board.place(@submarine, SUBMARINE_VALID_PLACEMENTS.sample)
-    success = []
-    if cruiser_place_ship.nil?
-      success << "Successfully placed cruiser"
-    else
-      return cruiser_place_ship
-    end
-
-    if sub_place_ship.nil? 
-      success << "Successfully placed submarine"
-    else
-      return sub_place_ship
-    end
-    success
+    @board.place(@cruiser, CRUISER_VALID_PLACEMENTS.sample)
+    @board.place(@submarine, SUBMARINE_VALID_PLACEMENTS.sample)
   end
   
 end
