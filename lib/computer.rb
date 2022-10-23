@@ -35,4 +35,6 @@ class Computer
     @board.place(@submarine, SUBMARINE_VALID_PLACEMENTS.sample)
   end
   
+  def fire_upon_player 
+  end
 end
