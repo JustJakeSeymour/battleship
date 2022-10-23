@@ -1,8 +1,6 @@
 require 'pry'
-require './lib/cell'
 require './lib/board'
 require './lib/ship'
-require './lib/computer'
 
 # In the runner files, afte player decides to play, call Computer.new.place_ship 
 # this will create the new computer instance AND call on the place ship method all in one go
@@ -21,13 +19,14 @@ class Computer
     %w(D3 D4)
   ]
 
-  attr_reader :board, :cruiser, :submarine, :ships 
+  attr_reader :board, 
+              :cruiser, 
+              :submarine 
 
   def initialize 
     @board = Board.new 
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
-    @ships = [@cruiser, @submarine]
     @fired_upon_coordinates = []
   end
 
