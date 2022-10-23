@@ -6,12 +6,14 @@ require './lib/game'
 
 require 'pry'
 
-game.menu
+game = Game.new
+
+# game.menu
 
 game.setup
 
-loop do
-game.turn
-break if winner
+# loop do
+# game.turn
+# break if winner
 
-game.results
+# game.results
