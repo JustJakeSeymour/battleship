@@ -46,51 +46,53 @@ class Board
     letters_or_numbers_sequential(letters, numbers)
   end
 
-def are_all_coordinates_valid(coordinates)
-  coordinates.all? do |coordinate|
-    valid_coordinate?(coordinate)
-  end
-end
-
-def letters_or_numbers_sequential(letters, numbers)
-  if letters.uniq.size == 1
-    if (numbers.first..numbers.last).to_a == numbers
-      return true
-    else
-      return false
+  def are_all_coordinates_valid(coordinates)
+    coordinates.all? do |coordinate|
+      valid_coordinate?(coordinate)
     end
-  elsif numbers.uniq.size == 1
-    if (letters.first..letters.last).to_a == letters
-      return true
-    else
-      return false
+  end
+
+  def letters_or_numbers_sequential(letters, numbers)
+    if letters.uniq.size == 1
+      if (numbers.first..numbers.last).to_a == numbers
+        return true
+     else
+        return false
+      end
+    elsif numbers.uniq.size == 1
+      if (letters.first..letters.last).to_a == letters
+        return true
+      else
+        return false
+      end
+    else 
+      false
     end
-  else 
-    false
   end
-end
 
-def place(ship, coordinates)
-  coordinates = coordinates.map {|coordinate| coordinate.upcase}
-  if !valid_placement?(ship, coordinates) || !are_all_coordinates_empty(coordinates)
-    return "That is an invalid placement"
+  def place(ship, coordinates)
+    coordinates = coordinates.map {|coordinate| coordinate.upcase}
+    if !valid_placement?(ship, coordinates) || !are_all_coordinates_empty(coordinates)
+      return "That is an invalid placement"
+    end
+    coordinates.each {|coordinate| @cells[coordinate].place_ship(ship) }
   end
-  coordinates.each {|coordinate| @cells[coordinate].place_ship(ship) }
-end
 
-def are_all_coordinates_empty(coordinates)
-  coordinates.all? do |coordinate|
-    @cells[coordinate].empty?
+  def are_all_coordinates_empty(coordinates)
+    coordinates.all? do |coordinate|
+      @cells[coordinate].empty?
+    end
   end
-end
 
-def render(reveal_ship = false)
-  if reveal_ship == true
-    board_render_reveal_ships
-  else reveal_ship == false
-    board_render_hide_ships
+  def render(reveal_ship = false)
+    if reveal_ship == true
+      board_render_reveal_ships
+    else reveal_ship == false
+     board_render_hide_ships
+    end
   end
-end
+
+  private 
 
   def board_render_reveal_ships
     row_a_keys = @cells.keys.select {|key| key[0] == "A"}
