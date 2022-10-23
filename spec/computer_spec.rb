@@ -36,4 +36,13 @@ RSpec.describe Computer do
       expect(computer.board.cells.values.select {|cell| !cell.empty?}.size).to eq(5)
     end
   end
+
+  describe '#fire_upon' do 
+    let!(:computer) {Computer.new}
+    # is this a good method name?
+    it 'can fire upon players board' do 
+
+    end
+  end
+  
 end
