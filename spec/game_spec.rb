@@ -10,6 +10,11 @@ RSpec.describe Game do
   it 'holds player & computer' do
 
   end
+
+  # need a test for the  @player.board.place that is called in the #until_valid_placement helper method 
+  # This is called initally the #setup on line 34 which then goes into the #until_valid_placement
+  # This action does not live in the Player class file so I couldn't test it in player_spec.rb
+  # The placing ships action DOES occur in the Computer class so I COULD/DID test for it in computer_spec.rb so no need to write a place ships test for the computer
   
   it 'can set up players board' do
 
