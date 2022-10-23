@@ -25,9 +25,11 @@ class Cell
     @fired_upon = true
     if @ship 
       @ship.hit
-      puts "Hit!"
+      puts "Miss!"
+      "Hit!"
     else 
       puts "Miss!"
+      "Miss!"
     end
   end
 

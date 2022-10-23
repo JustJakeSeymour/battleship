@@ -32,6 +32,7 @@ class Player
     until @board.valid_coordinate?(coordinate)
       puts "That is not a valid coordinate"
       puts "Please enter a new coordinate"
+      coordinate = gets.chomp.upcase
     end
     # this check works for repeats, but we are missing the ability to check for valid_coordinate?
     until !@fired_upon_coordinates.include?(coordinate)

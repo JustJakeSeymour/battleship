@@ -12,7 +12,8 @@ class Game
   end
 
   def menu
-
+    puts "Welcome to BATTLESHIP"
+    puts "Enter p to play. Enter q to quit."
   end
 
   def setup
@@ -47,19 +48,31 @@ class Game
     puts "Enter coord to fire on"
     coord = gets.chomp.upcase
     @player.fire_upon_computer(coord, @computer.board)
-    
+    # right now, both the computer and the player can win (if it comes down to the very last turn)
+    # perhaps we place a check in here to end the turn before player or computer can choose in the event they have been sunk
     puts "My turn:"
     @computer.fire_upon_player(@player.board)
-
+    # Also: it might be better if we use interpolation to say whether the shot was a "hit" or "miss".
+    # for some reason the final shot returns "miss" instead of a hit, even though that shot ends the game.
+    # MAYBE THIS IS HAPPENING BECAUSE THE FINAL SHOT DOES NOT REGISTER AS A HIT, BECAUSE IT IS CHANGING THE STATUS TO SUNK?
   end
 
+  # results method gives different message based on which board has all sunken ships
   def results
-    # if computer.ships.all?(sunk?)
-    # return "You win!"
+    # it might be nice to show the board at the end of the game, to look at
+    puts "=🌊=🌊=🌊=🌊=🌊=🌊=🌊=🌊=🌊"
+    puts "The results:"
+    both_boards_rendered
 
-    # if player.ships.all?(sunk?)
-    # return "I won""
+    if computer_ships_all_sunk?
+      puts "You win!"
+      "You win!"
+    end
 
+    if player_ships_all_sunk?
+      puts "I won."
+      "I won."
+    end
   end
 
   def player_ships_all_sunk?
@@ -72,11 +85,9 @@ class Game
 
   private 
 
-  # Created helper method to use in #setup 
   def until_valid_placement(ship, player_coordinates)
     until @player.board.valid_placement?(ship, player_coordinates)
       puts "Those are invalid coordinates. Please try again:"
-      # We need to reset the initial player_coordinates variable so that we can eventually meet the until statement two lines above
       player_coordinates = gets.chomp.split(',')
     end
     @player.board.place(ship, player_coordinates)
@@ -86,7 +97,7 @@ class Game
   def both_boards_rendered
     puts "Enemy board:"
     puts @computer.board.render
-    puts "======================"
+    puts "|=========|"
     puts "Your board:"
     puts @player.board.render(true)    
   end
