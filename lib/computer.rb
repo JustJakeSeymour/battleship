@@ -46,8 +46,6 @@ class Computer
   end
 
   private
-  # every method that is written under this 'private' flag means that it can ONLY be accesses in this class.
-  # Methods written under the private flag are helper methods
 
   def fired_upon_coordinate(chosen_coordinate_to_fire_upon) 
     until !@fired_upon_coordinates.include?(chosen_coordinate_to_fire_upon)
