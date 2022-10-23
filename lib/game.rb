@@ -33,8 +33,7 @@ class Game
     # Created an until loop to puts invalid coords messages until they enter valid coords. Can be seen in below helper method
     until_valid_placement(@player.cruiser, cruiser_coordinates)
     # place_ship is being called in the below helper method
-  
-    @player.board.render(true)
+    puts @player.board.render(true)
 
     puts "Enter the coordinates for the #{@player.submarine.name} (#{@player.submarine.length} spaces):"
     puts "Separate coordinates by comma (,) only. Do not include spaces."
@@ -43,13 +42,19 @@ class Game
 
     until_valid_placement(@player.submarine, submarine_coordinates)
 
-    @player.board.render(true)
+    puts @player.board.render(true)
   end
   
   def turn
+    puts "Enter coord to fire on"
+    coord = gets.chomp.upcase
+    @player.fire_upon_computer(coord, @computer.board)
+    # The above was just so I could test the #fire_upon_computer in Player class. You can remove/update it if you want
+    
     # At some point in here, we will call fire_upon_player(@player.board) to fire upon the player's individual cell within their board instance
     # fire_upon_player(@player.board) should return the result of the cell being fired upon (was it a hit or miss?)
-    # 
+    
+    # At some point in here, we will call fire_upon_computer(coordinate, @computer.board) the coordinate argument = the coordinate that the player chose to fire upon
 
   end
 
@@ -75,7 +80,7 @@ class Game
       # We need to reset the initial player_coordinates variable so that we can eventually meet the until statement two lines above
       player_coordinates = gets.chomp.split(',')
     end
-    @player.place_ships(ship, player_coordinates)
+    @player.board.place(ship, player_coordinates)
   end
   
 end
