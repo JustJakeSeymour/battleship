@@ -45,17 +45,11 @@ class Game
 
     @player.board.render(true)
   end
-  # Created helper method to use in #setup 
-  def until_valid_placement(ship, player_coordinates)
-    until @player.board.valid_placement?(ship, player_coordinates)
-      puts "Those are invalid coordinates. Please try again:"
-      # We need to reset the initial player_coordinates variable so that we can eventually meet the until statement on line 50
-      player_coordinates = gets.chomp.split(',')
-    end
-    @player.place_ships(ship, player_coordinates)
-  end
   
   def turn
+    # At some point in here, we will call fire_upon_player(@player.board) to fire upon the player's individual cell within their board instance
+    # fire_upon_player(@player.board) should return the result of the cell being fired upon (was it a hit or miss?)
+    # 
 
   end
 
@@ -70,6 +64,18 @@ class Game
 
   def setup_text
 
+  end
+
+  private 
+
+  # Created helper method to use in #setup 
+  def until_valid_placement(ship, player_coordinates)
+    until @player.board.valid_placement?(ship, player_coordinates)
+      puts "Those are invalid coordinates. Please try again:"
+      # We need to reset the initial player_coordinates variable so that we can eventually meet the until statement two lines above
+      player_coordinates = gets.chomp.split(',')
+    end
+    @player.place_ships(ship, player_coordinates)
   end
   
 end
