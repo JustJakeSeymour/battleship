@@ -14,6 +14,8 @@ class Player
     @fired_upon_coordinates = []
   end
 
+  # place_ships method was removed and this action now occurs in the Game class file
+
     # player is prompted to give a coordinate
   def fire_upon_computer(coordinate, computer_board)
     # computer_board argument above should be an instance of the computer's board passed in during the turn method in the game class
