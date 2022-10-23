@@ -14,6 +14,18 @@ class Game
   def menu
     puts "Welcome to BATTLESHIP"
     puts "Enter p to play. Enter q to quit."
+
+    input = gets.chomp.upcase
+    loop do
+      if input == "P"
+        return
+      elsif input == "Q"
+        exit
+      else
+        puts "Input not recognized. Enter p or q."
+        input = gets.chomp.upcase
+      end
+    end
   end
 
   def setup
@@ -70,9 +82,26 @@ class Game
     end
 
     if player_ships_all_sunk?
-      puts "I won."
-      "I won."
+      puts "I won!"
+      "I won!"
     end
+    
+    # # play again option, disabled, 
+    # # loop is done in runner, option to quit happens in menu.
+    # puts "Play again? (Y/N)"
+    # input = gets.chomp.upcase
+    # loop do
+    #   if input == 'Y'
+    #     menu
+    #     setup
+    #     self
+    #   elsif input == 'N'
+    #     exit
+    #   else
+    #     puts "Input not recognized. Enter Y or N."
+    #     input = gets.chomp.upcase
+    #   end
+    # end
   end
 
   def player_ships_all_sunk?
@@ -95,10 +124,11 @@ class Game
 
   # Create helper method to use for both_boards_rendered
   def both_boards_rendered
-    puts "Enemy board:"
+    computer_board_title = "COMPUTER BOARD".center(30, '=')
+    puts computer_board_title
     puts @computer.board.render
-    puts "|=========|"
-    puts "Your board:"
+    player_board_title = "PLAYER BOARD".center(30, '=')
+    puts player_board_title
     puts @player.board.render(true)    
   end
   

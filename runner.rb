@@ -6,17 +6,19 @@ require './lib/game'
 
 require 'pry'
 
-game = Game.new
+loop do
+  # game variable within loop wipes board, fresh start
+  game = Game.new
 
-# game.menu
+  game.menu
 
-game.setup
+  game.setup
 
-# this until block repeats the turn step until all of the ships on one board are sunk
-until game.player_ships_all_sunk? || game.computer_ships_all_sunk?
-  game.turn
+  # this until block repeats the turn step until all of the ships on one board are sunk
+  until game.player_ships_all_sunk? || game.computer_ships_all_sunk?
+    game.turn
+  end
+
+  game.results
 end
-
-game.results
-
 # do loop here there Y goes, game.setup -> game.turn loop -> game.results
