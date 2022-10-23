@@ -12,8 +12,9 @@ game = Game.new
 
 game.setup
 
-# loop do
-# game.turn
+loop do
+  game.turn
+end
 # break if winner
 
 # game.results
