@@ -3,68 +3,43 @@ require './lib/cell'
 require './lib/board'
 require './lib/player'
 require './lib/game'
+require './lib/computer'
 
 require 'pry'
 
 RSpec.describe Game do
-### Tests here verify things that can happen in isolation
-### Helpers that can prevent o v e r r e a c h i n g
+  let!(:game) {Game.new}
 
   it 'holds player & computer' do
-
-  end
-
-  # need a test for the  @player.board.place that is called in the #until_valid_placement helper method 
-  # This is called initally the #setup on line 34 which then goes into the #until_valid_placement
-  # This action does not live in the Player class file so I couldn't test it in player_spec.rb
-  # The placing ships action DOES occur in the Computer class so I COULD/DID test for it in computer_spec.rb so no need to write a place ships test for the computer
-  
-  it 'can set up players board' do
-
+    expect(game.player).to be_instance_of Player
+    expect(game.computer).to be_instance_of Computer
   end
   
-  it 'can set up computer board' do
+  it 'can see if all computer ships have sank' do
+    3.times do 
+      game.computer.cruiser.hit 
+    end
 
-  end
-  
-  it 'does the set up in single method' do
-
-  end
-
-  it 'shows both boards' do
-
-  end
-
-  it 'has a turn phase' do
+    expect(game.computer_ships_all_sunk?).to be false
     
+    2.times do 
+      game.computer.submarine.hit
+    end
+
+    expect(game.computer_ships_all_sunk?).to be true
   end
-
-  it 'has player fire on computer board' do
-
-  end
-
-  it 'has computer fire on player board' do
+  
+  it 'can see if all player ships have sank' do
+    3.times do
+      game.player.cruiser.hit
+    end
     
-  end
-
-  it 'continues to do turns until either player or computer is all sunk' do
-
-  end
-  
-  it 'displays game result' do
-
-  end
-  
-  it 'asks to play again' do
-
-  end
-  
-  it 'goes to set up method if play again is selected' do
-
-  end
-
-  it 'ends if play again is not selected' do
+    expect(game.player_ships_all_sunk?).to be false
     
+    2.times do
+    game.player.submarine.hit
+    end
+
+    expect(game.player_ships_all_sunk?).to be true
   end
-  
 end

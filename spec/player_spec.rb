@@ -40,8 +40,8 @@ RSpec.describe Player do
 
       expect(any_fired_upon_cells).to be false
 
-      expect(player.fire_upon_computer("A1", computer.board)).to eq('Miss!')
-
+      player.fire_upon_computer("A1", computer.board)
+    
       any_fired_upon_cells = computer.board.cells.values.any? do |cell|
         cell.fired_upon?
       end
@@ -50,8 +50,7 @@ RSpec.describe Player do
 
       computer.board.place(cruiser, ["A2","A3","A4"])
 
-      expect(player.fire_upon_computer("A3", computer.board)).to eq("Hit!")
+      expect(player.fire_upon_computer("A3", computer.board)).to eq("A3")
     end
-  end
-  
+  end  
 end
