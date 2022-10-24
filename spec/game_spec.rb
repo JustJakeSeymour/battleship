@@ -7,6 +7,9 @@ require './lib/game'
 require 'pry'
 
 RSpec.describe Game do
+### Tests here verify things that can happen in isolation
+### Helpers that can prevent o v e r r e a c h i n g
+
   it 'holds player & computer' do
 
   end

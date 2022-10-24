@@ -43,7 +43,7 @@ class Game
     cruiser_coordinates = gets.chomp.split(',')
 
     until_valid_placement(@player.cruiser, cruiser_coordinates)
-    # place_ship is being called in the below helper method
+    
     puts @player.board.render(true)
 
     puts "Enter the coordinates for the #{@player.submarine.name} (#{@player.submarine.length} spaces):"
@@ -56,20 +56,30 @@ class Game
   
   def turn
     both_boards_rendered
+
     puts "Your turn:"
     puts "Enter a coordinate to fire on"
     coordinate = gets.chomp.upcase
     @player.fire_upon_computer(coordinate, @computer.board)
-    # right now, both the computer and the player can win (if it comes down to the very last turn)
-    # perhaps we place a check in here to end the turn before player or computer can choose in the event they have been sunk
-    puts "My turn:"
+
+    ## Coordinate's render status can tell result
+    ## Call computer.board.cells[coordinate] render status
+    puts "Your shot on #{coordinate} was a #{@computer.shot_result(coordinate)}"
+
+    # this is a check to end the game before computer has another chance to fire, preventing tie scenario
+    if computer_ships_all_sunk?
+      return
+    else
+      nil
+    end
+
     @computer.fire_upon_player(@player.board)
-    # for some reason the final shot returns "miss" instead of a hit, even though that shot ends the game.
-    # MAYBE THIS IS HAPPENING BECAUSE THE FINAL SHOT DOES NOT REGISTER AS A HIT, BECAUSE IT IS CHANGING THE STATUS TO SUNK?
+    
+    puts "My turn:"
+    puts "My shot on #{@computer.chosen_coordinate} was a #{@player.shot_result(@computer.chosen_coordinate)}"
   end
 
   def results
-    # it might be nice to show the board at the end of the game, to look at
     puts "=🌊=🌊=🌊=🌊=🌊=🌊=🌊=🌊=🌊"
     puts "The results:"
     both_boards_rendered
@@ -109,5 +119,4 @@ class Game
     puts player_board_title
     puts @player.board.render(true)    
   end
-  
 end

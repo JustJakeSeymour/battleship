@@ -7,6 +7,7 @@ require './lib/game'
 require 'pry'
 
 loop do
+
   game = Game.new
 
   game.menu

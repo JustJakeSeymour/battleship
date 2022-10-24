@@ -40,6 +40,22 @@ class Computer
     player_board.cells[valid_coordinate].fire_upon
   end
 
+  def chosen_coordinate
+    @fired_upon_coordinates.last
+  end
+
+  def shot_result(coordinate)
+    if @board.cells[coordinate].render == 'M'
+      "Miss!"
+    elsif @board.cells[coordinate].render == 'H'
+      "Hit!"
+    elsif @board.cells[coordinate].render == 'X'
+      "Hit, and sunk the ship!"
+    else
+      "Error"
+    end
+  end
+
   private
 
   def fired_upon_coordinate(chosen_coordinate_to_fire_upon) 
