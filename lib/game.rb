@@ -57,9 +57,9 @@ class Game
   def turn
     both_boards_rendered
     puts "Your turn:"
-    puts "Enter coord to fire on"
-    coord = gets.chomp.upcase
-    @player.fire_upon_computer(coord, @computer.board)
+    puts "Enter a coordinate to fire on"
+    coordinate = gets.chomp.upcase
+    @player.fire_upon_computer(coordinate, @computer.board)
     # right now, both the computer and the player can win (if it comes down to the very last turn)
     # perhaps we place a check in here to end the turn before player or computer can choose in the event they have been sunk
     puts "My turn:"
