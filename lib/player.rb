@@ -25,6 +25,18 @@ class Player
     # The above will either return "Hit!" or "Miss!" from the fire_upon method in the cell class
   end
 
+   def shot_result(chosen_coordinate)
+    if @board.cells[chosen_coordinate].render == 'M'
+      "Miss!"
+    elsif @board.cells[chosen_coordinate].render == 'H'
+      "Hit!"
+    elsif @board.cells[chosen_coordinate].render == 'X'
+      "Hit, and sunk the ship!"
+    else
+      "Error"
+    end
+  end
+
   private 
 
   def fired_upon_coordinate(coordinate) 
