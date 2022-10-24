@@ -78,30 +78,11 @@ class Game
 
     if computer_ships_all_sunk?
       puts "You win!"
-      "You win!"
     end
 
     if player_ships_all_sunk?
       puts "I won!"
-      "I won!"
     end
-    
-    # # play again option, disabled, 
-    # # loop is done in runner, option to quit happens in menu.
-    # puts "Play again? (Y/N)"
-    # input = gets.chomp.upcase
-    # loop do
-    #   if input == 'Y'
-    #     menu
-    #     setup
-    #     self
-    #   elsif input == 'N'
-    #     exit
-    #   else
-    #     puts "Input not recognized. Enter Y or N."
-    #     input = gets.chomp.upcase
-    #   end
-    # end
   end
 
   def player_ships_all_sunk?
