@@ -57,16 +57,15 @@ class Game
   def turn
     both_boards_rendered
 
+    puts "------------------------------\n\n\n"
+
     puts "Your turn:"
     puts "Enter a coordinate to fire on"
     coordinate = gets.chomp.upcase
-    @player.fire_upon_computer(coordinate, @computer.board)
+    valid_coordinate = @player.fire_upon_computer(coordinate, @computer.board)
 
-    ## Coordinate's render status can tell result
-    ## Call computer.board.cells[coordinate] render status
-    puts "Your shot on #{coordinate} was a #{@computer.shot_result(coordinate)}"
+    puts "Your shot on #{valid_coordinate} was a #{@computer.shot_result(valid_coordinate)}"
 
-    # this is a check to end the game before computer has another chance to fire, preventing tie scenario
     if computer_ships_all_sunk?
       return
     else
@@ -89,7 +88,7 @@ class Game
     end
 
     if player_ships_all_sunk?
-      puts "I won!"
+      puts "Computer won!"
     end
   end
 

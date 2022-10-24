@@ -24,6 +24,7 @@ class Player
     valid_coordinate = fired_upon_coordinate(coordinate)
      
     computer_board.cells[valid_coordinate].fire_upon
+    valid_coordinate
   end
 
    def shot_result(chosen_coordinate)
