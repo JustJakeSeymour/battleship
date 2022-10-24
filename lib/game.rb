@@ -64,12 +64,10 @@ class Game
     # perhaps we place a check in here to end the turn before player or computer can choose in the event they have been sunk
     puts "My turn:"
     @computer.fire_upon_player(@player.board)
-    # Also: it might be better if we use interpolation to say whether the shot was a "hit" or "miss".
     # for some reason the final shot returns "miss" instead of a hit, even though that shot ends the game.
     # MAYBE THIS IS HAPPENING BECAUSE THE FINAL SHOT DOES NOT REGISTER AS A HIT, BECAUSE IT IS CHANGING THE STATUS TO SUNK?
   end
 
-  # results method gives different message based on which board has all sunken ships
   def results
     # it might be nice to show the board at the end of the game, to look at
     puts "=🌊=🌊=🌊=🌊=🌊=🌊=🌊=🌊=🌊"
@@ -103,7 +101,6 @@ class Game
     @player.board.place(ship, player_coordinates)
   end
 
-  # Create helper method to use for both_boards_rendered
   def both_boards_rendered
     computer_board_title = "COMPUTER BOARD".center(30, '=')
     puts computer_board_title

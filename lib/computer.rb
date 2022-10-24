@@ -2,9 +2,6 @@ require 'pry'
 require './lib/board'
 require './lib/ship'
 
-# In the runner files, afte player decides to play, call Computer.new.place_ship 
-# this will create the new computer instance AND call on the place ship method all in one go
-
 class Computer 
   CRUISER_VALID_PLACEMENTS = [
     %w(A1 A2 A3),
@@ -36,13 +33,11 @@ class Computer
   end
   
   def fire_upon_player(player_board) 
-    # player_board argument above should be an instance of the player's board passed in during the turn method in the game class
     chosen_coordinate_to_fire_upon = board.cells.keys.sample
 
     valid_coordinate = fired_upon_coordinate(chosen_coordinate_to_fire_upon)
     
     player_board.cells[valid_coordinate].fire_upon
-    # The above will either return "Hit!" or "Miss!" from the fire_upon method in the cell class
   end
 
   private
