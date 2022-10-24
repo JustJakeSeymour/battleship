@@ -28,6 +28,13 @@ class Player
   private 
 
   def fired_upon_coordinate(coordinate) 
+    # add valid_coordinate? using until condition as well
+    until @board.valid_coordinate?(coordinate)
+      puts "That is not a valid coordinate"
+      puts "Please enter a new coordinate"
+      coordinate = gets.chomp.upcase
+    end
+    # this check works for repeats, but we are missing the ability to check for valid_coordinate?
     until !@fired_upon_coordinates.include?(coordinate)
       puts "You have already fired upon this coordinate"
       puts "Please enter a new coordinate"

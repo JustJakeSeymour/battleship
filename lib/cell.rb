@@ -27,7 +27,7 @@ class Cell
       @ship.hit
       "Hit!"
     else 
-      'Miss!'
+      "Miss!"
     end
   end
 
