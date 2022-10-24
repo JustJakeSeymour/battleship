@@ -74,6 +74,7 @@ class Game
     end
 
     @computer.fire_upon_player(@player.board)
+    
     puts "My turn:"
     puts "My shot on #{@computer.chosen_coordinate} was a #{@player.shot_result(@computer.chosen_coordinate)}"
   end
