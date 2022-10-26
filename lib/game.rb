@@ -46,7 +46,7 @@ class Game
     until_valid_placement(@player.cruiser, cruiser_coordinates)
     
     puts @player.board.render(true)
-
+  
     puts "Enter the coordinates for the #{@player.submarine.name} (#{@player.submarine.length} spaces):"
     puts "Separate coordinates by comma (,) only. Do not include spaces."
     
@@ -104,7 +104,11 @@ class Game
   private 
 
   def until_valid_placement(ship, player_coordinates)
-    until @player.board.valid_placement?(ship, player_coordinates)
+    until @player.board.are_all_coordinates_empty(player_coordinates)
+      puts "Those coordinates are not empty. Please try again:"
+      player_coordinates = gets.chomp.upcase.split(',')
+    end
+    until @player.board.valid_placement?(ship, player_coordinates) # && @player.board.are_all_coordinates_empty(player_coordinates)
       puts "Those are invalid coordinates. Please try again:"
       player_coordinates = gets.chomp.split(',')
     end
