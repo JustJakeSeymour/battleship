@@ -80,7 +80,7 @@ class Board
 
   def are_all_coordinates_empty(coordinates)
     coordinates.all? do |coordinate|
-      @cells[coordinate].empty?
+      @cells[coordinate.upcase].empty?
     end
   end
 
